@@ -2,6 +2,9 @@ import styles from "./App.module.css";
 import NavBar from "./components/NavBar";
 import Container from "react-bootstrap/Container";
 import { Route, Switch } from "react-router-dom";
+import "./api/axiosDefaults";
+import SignUpForm from "./pages/auth/SignUpForm";
+
 
 function App() {
   const currentUser = useCurrentUser();
@@ -16,14 +19,14 @@ function App() {
             exact
             path="/"
             render={() => (
-              <CarsList message="No results found, adjust the search keyword." />
+              <AutotradersList message="No results found, adjust the search keyword." />
             )}
           />
           <Route
             exact
             path="/feed"
             render={() => (
-              <CarsList
+              <AutotradersList
                 message="No results found, adjust the search keyword or follow a user."
                 filter={`owner__followed__owner__profile=${profile_id}&`}
               />
@@ -33,7 +36,7 @@ function App() {
             exact
             path="/saved"
             render={() => (
-              <CarsList
+              <AutotradersList
                 message="No results found, adjust the search keyword or save a autotrader."
                 filter={`saved__owner__profile=${profile_id}&ordering=-saved__created_at&`}
               />
